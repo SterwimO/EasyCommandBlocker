@@ -65,6 +65,11 @@ public class ConfigManager {
         try {
             String configText = new String(Files.readAllBytes(configFile));
             if(!isProxy){
+                if(!configText.contains("legacy_support:")){
+                    yamlFile.set("legacy_support", false);
+                    yamlFile.save();
+                    yamlFile.load();
+                }
                 if(!configText.contains("update_notify:")){
                     yamlFile.set("update_notify", true);
                     yamlFile.save();

@@ -39,7 +39,9 @@ public class EasyCommandBlocker extends JavaPlugin {
         registerCommands();
         registerEvents();
         bungeeMessagingManager = new BungeeMessagingManager(this);
-        protocolLibManager = new ProtocolLibManager(this);
+        if(this.configManager.getConfig().getBoolean("legacy_support")){
+            protocolLibManager = new ProtocolLibManager(this);
+        }
         viaVersionManager = new ViaVersionManager(this);
 
         Bukkit.getConsoleSender().sendMessage(MessagesUtils.getColoredMessage(prefix+" &eHas been enabled! &fVersion: "+version));
@@ -81,13 +83,17 @@ public class EasyCommandBlocker extends JavaPlugin {
                 serverVersion = ServerVersion.v1_21_R5;
                 break;
             case "1.21.9":
+            case "1.21.10":
                 serverVersion = ServerVersion.v1_21_R6;
+                break;
+            case "1.21.11":
+                serverVersion = ServerVersion.v1_21_R7;
                 break;
             default:
                 try{
                     serverVersion = ServerVersion.valueOf(packageName.replace("org.bukkit.craftbukkit.", ""));
                 }catch(Exception e){
-                    serverVersion = ServerVersion.v1_21_R6;
+                    serverVersion = ServerVersion.v1_21_R7;
                 }
         }
     }
