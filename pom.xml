@@ -74,6 +74,17 @@
             <version>1.8</version>
         </dependency>
         <dependency>
+            <groupId>com.mojang</groupId>
+            <artifactId>brigadier</artifactId>
+            <version>1.0.18</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.Carleslc</groupId>
+            <artifactId>Simple-YAML</artifactId>
+            <version>1.8</version>
+        </dependency>
+        <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>1.30</version>
