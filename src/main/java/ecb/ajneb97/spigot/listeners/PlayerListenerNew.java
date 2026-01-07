@@ -12,6 +12,9 @@ import org.bukkit.event.player.PlayerCommandSendEvent;
 import java.util.List;
 import java.lang.reflect.Method;
 import org.bukkit.command.CommandMap;
+import org.bukkit.command.SimpleCommandMap;
+import java.util.Map;
+import java.util.HashSet;
 
 public class PlayerListenerNew implements Listener {
     private EasyCommandBlocker plugin;
@@ -33,10 +36,14 @@ public class PlayerListenerNew implements Listener {
         try {
             Method getCommandMap = plugin.getServer().getClass().getMethod("getCommandMap");
             CommandMap commandMap = (CommandMap) getCommandMap.invoke(plugin.getServer());
-            for (org.bukkit.command.Command command : commandMap.getCommands()) {
-                String perm = command.getPermission();
-                if (perm == null || plugin.getLuckPermsManager().hasPermission(player, perm)) {
-                    event.getCommands().add(command.getName());
+            if (commandMap instanceof SimpleCommandMap) {
+                SimpleCommandMap simple = (SimpleCommandMap) commandMap;
+                Map<String, org.bukkit.command.Command> known = simple.getKnownCommands();
+                for (org.bukkit.command.Command command : new HashSet<>(known.values())) {
+                    String perm = command.getPermission();
+                    if (perm == null || plugin.getLuckPermsManager().hasPermission(player, perm)) {
+                        event.getCommands().add(command.getName());
+                    }
                 }
             }
         } catch (Exception e) {
