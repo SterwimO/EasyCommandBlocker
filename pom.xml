@@ -117,47 +117,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <plugins>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.1</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>21</source>
-                    <target>21</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <configuration>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <relocations>
-                                <relocation>
-                                    <pattern>org.simpleyaml</pattern>
-                                    <shadedPattern>ecb.ajneb97.libs.simpleyaml</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>org.yaml.snakeyaml</pattern>
-                                    <shadedPattern>ecb.ajneb97.libs.snakeyaml</shadedPattern>
-                                </relocation>
-                            </relocations>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
+        <plugins> <!-- Modern compiler plugin compatible Java 21 --> <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-compiler-plugin</artifactId> <version>3.11.0</version> <configuration> <release>21</release> </configuration> </plugin> <!-- Modern shade plugin compatible Java 21 --> <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-shade-plugin</artifactId> <version>3.5.0</version> <executions> <execution> <phase>package</phase> <goals> <goal>shade</goal> </goals> <configuration> <relocations> <relocation> <pattern>org.simpleyaml</pattern> <shadedPattern>ecb.ajneb97.libs.simpleyaml</shadedPattern> </relocation> <relocation> <pattern>org.yaml.snakeyaml</pattern> <shadedPattern>ecb.ajneb97.libs.snakeyaml</shadedPattern> </relocation> </relocations> </configuration> </execution> </executions> </plugin> </plugins>
     </build>
 
 </project>
