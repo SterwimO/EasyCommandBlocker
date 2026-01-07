@@ -2,3 +2,4 @@ main: ecb.ajneb97.waterfall.EasyCommandBlocker
 version: ${project.version}
 name: EasyCommandBlocker
 author: Ajneb97
+softdepend: [LuckPerms]
