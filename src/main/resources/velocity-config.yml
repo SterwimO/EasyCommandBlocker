@@ -1,7 +1,3 @@
-tab:
-  default:
-    priority: 0
-    commands: []
 blocked_command_default_actions:
   - "message: &8[&b&lECB&8] &cYou don't have permissions to use that command."
   - "playsound: BLOCK_NOTE_BLOCK_PLING;10;0.1"
