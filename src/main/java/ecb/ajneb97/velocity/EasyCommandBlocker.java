@@ -11,6 +11,8 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import ecb.ajneb97.core.managers.CommandsManager;
 import ecb.ajneb97.core.managers.ConfigManager;
 import ecb.ajneb97.velocity.managers.LuckPermsManager;
+import ecb.ajneb97.velocity.listeners.PlayerListener;
+import ecb.ajneb97.velocity.utils.PluginMessagingUtils;
 
 import java.nio.file.Path;
 import java.util.logging.Logger;
