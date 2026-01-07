@@ -24,19 +24,14 @@ public class PlayerListenerNew implements Listener {
         if(player.isOp() || player.hasPermission("easycommandblocker.bypass.tab")){
             return;
         }
-        CommandsManager commandsManager = plugin.getCommandsManager();
-        List<String> commands = commandsManager.getTabCommands(OtherUtils.getPlayerPermissionsList(player));
 
         event.getCommands().clear();
 
-        if(commands == null){
-            return;
-        }
-        for(String command : commands){
-            command = command.replaceFirst("/","");
-            command = command.split(" ")[0];
-            if(!event.getCommands().contains(command)){
-                event.getCommands().add(command);
+        // Add commands based on their permissions
+        for (org.bukkit.command.Command command : plugin.getServer().getCommandMap().getCommands()) {
+            String perm = command.getPermission();
+            if (perm == null || plugin.getLuckPermsManager().hasPermission(player, perm)) {
+                event.getCommands().add(command.getName());
             }
         }
     }
