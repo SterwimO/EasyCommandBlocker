@@ -7,8 +7,8 @@ import ecb.ajneb97.core.model.internal.UpdateCheckerResult;
 import ecb.ajneb97.spigot.listeners.PlayerListener;
 import ecb.ajneb97.spigot.listeners.PlayerListenerNew;
 import ecb.ajneb97.spigot.managers.BungeeMessagingManager;
+import ecb.ajneb97.spigot.managers.LuckPermsManager;
 import ecb.ajneb97.spigot.managers.ProtocolLibManager;
-import ecb.ajneb97.spigot.managers.ViaVersionManager;
 import ecb.ajneb97.spigot.utils.MessagesUtils;
 import ecb.ajneb97.spigot.utils.OtherUtils;
 import ecb.ajneb97.spigot.utils.ServerVersion;
@@ -26,6 +26,7 @@ public class EasyCommandBlocker extends JavaPlugin {
     private ProtocolLibManager protocolLibManager;
     private ViaVersionManager viaVersionManager;
     private BungeeMessagingManager bungeeMessagingManager;
+    private LuckPermsManager luckPermsManager;
     private CommandsManager commandsManager;
     private ConfigManager configManager;
     private UpdateCheckerManager updateCheckerManager;
@@ -36,6 +37,7 @@ public class EasyCommandBlocker extends JavaPlugin {
         this.configManager.registerConfig();
         this.configManager.checkMessagesUpdate();
         commandsManager = new CommandsManager(configManager.getConfig());
+        luckPermsManager = new LuckPermsManager();
         registerCommands();
         registerEvents();
         bungeeMessagingManager = new BungeeMessagingManager(this);
@@ -149,5 +151,9 @@ public class EasyCommandBlocker extends JavaPlugin {
 
     public ConfigManager getConfigManager() {
         return configManager;
+    }
+
+    public LuckPermsManager getLuckPermsManager() {
+        return luckPermsManager;
     }
 }
