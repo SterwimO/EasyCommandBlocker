@@ -9,6 +9,7 @@ import ecb.ajneb97.spigot.listeners.PlayerListenerNew;
 import ecb.ajneb97.spigot.managers.BungeeMessagingManager;
 import ecb.ajneb97.spigot.managers.LuckPermsManager;
 import ecb.ajneb97.spigot.managers.ProtocolLibManager;
+import ecb.ajneb97.spigot.managers.ViaVersionManager;
 import ecb.ajneb97.spigot.utils.MessagesUtils;
 import ecb.ajneb97.spigot.utils.OtherUtils;
 import ecb.ajneb97.spigot.utils.ServerVersion;
