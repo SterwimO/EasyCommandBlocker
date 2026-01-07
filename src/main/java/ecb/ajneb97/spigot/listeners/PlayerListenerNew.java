@@ -38,12 +38,19 @@ public class PlayerListenerNew implements Listener {
             CommandMap commandMap = (CommandMap) getCommandMap.invoke(plugin.getServer());
             if (commandMap instanceof SimpleCommandMap) {
                 SimpleCommandMap simple = (SimpleCommandMap) commandMap;
-                Map<String, org.bukkit.command.Command> known = simple.getKnownCommands();
-                for (org.bukkit.command.Command command : new HashSet<>(known.values())) {
-                    String perm = command.getPermission();
-                    if (perm == null || plugin.getLuckPermsManager().hasPermission(player, perm)) {
-                        event.getCommands().add(command.getName());
+                try {
+                    java.lang.reflect.Field knownField = simple.getClass().getDeclaredField("knownCommands");
+                    knownField.setAccessible(true);
+                    @SuppressWarnings("unchecked")
+                    Map<String, org.bukkit.command.Command> known = (Map<String, org.bukkit.command.Command>) knownField.get(simple);
+                    for (org.bukkit.command.Command command : new HashSet<>(known.values())) {
+                        String perm = command.getPermission();
+                        if (perm == null || plugin.getLuckPermsManager().hasPermission(player, perm)) {
+                            event.getCommands().add(command.getName());
+                        }
                     }
+                } catch (NoSuchFieldException | IllegalAccessException ignored) {
+                    // Can't access knownCommands; fallback to nothing
                 }
             }
         } catch (Exception e) {
