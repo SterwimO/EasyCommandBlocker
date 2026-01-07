@@ -10,8 +10,7 @@ import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
 import ecb.ajneb97.core.managers.CommandsManager;
 import ecb.ajneb97.core.managers.ConfigManager;
-import ecb.ajneb97.velocity.listeners.PlayerListener;
-import ecb.ajneb97.velocity.utils.PluginMessagingUtils;
+import ecb.ajneb97.velocity.managers.LuckPermsManager;
 
 import java.nio.file.Path;
 import java.util.logging.Logger;
@@ -25,6 +24,7 @@ public class EasyCommandBlocker {
     private final Path dataDirectory;
     private CommandsManager commandsManager;
     private ConfigManager configManager;
+    private LuckPermsManager luckPermsManager;
     public String prefix = "&8[&bEasy&9CommandBlocker&8]";
 
     @Inject
@@ -40,6 +40,7 @@ public class EasyCommandBlocker {
         this.configManager.registerConfig();
         this.configManager.checkMessagesUpdate();
         commandsManager = new CommandsManager(configManager.getConfig());
+        luckPermsManager = new LuckPermsManager();
 
         server.getEventManager().register(this, new PlayerListener(this));
         CommandMeta meta = server.getCommandManager().metaBuilder("easycommandblocker")
@@ -65,6 +66,10 @@ public class EasyCommandBlocker {
 
     public CommandsManager getCommandsManager() {
         return commandsManager;
+    }
+
+    public LuckPermsManager getLuckPermsManager() {
+        return luckPermsManager;
     }
 
     public void customReload(){
